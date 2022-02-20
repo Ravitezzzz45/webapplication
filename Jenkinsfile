@@ -1,63 +1,51 @@
 pipeline{
-	agent any
-	stages {
-		stage("checkout"){
-			steps{
+    agent any
+    stages{
+        stage("checkout"){
+            steps{
                 checkout([$class: 'GitSCM',
-                branches: [[name: '*/master']], 
+                branches: [[name: '*/master']],
                 extensions: [],
-                userRemoteConfigs: [[url: 'https://github.com/Ravitezzzz45/webapplication.git']]])
-				}
-		}
-		stage("test case"){
-			steps{
-				grrovy code for testcase metrics here 
-			}
-		}
-		stage("QA"){
-			steps{
-			grrovy code for QA here 
-			}
-		}
-		stage("build"){
-			steps{
-				grrovy code for build here 
-				}
-		}
-		stage("artifactory push"){
-			steps{
-				grrovy code for artifactory push here 
-				}
-		}
-		stage("create image"){
-			steps{
-				grrovy code for create image here 
-				}
-		}
-		stage("deploy to k8s"){
-			steps{
-				grrovy code for deploy to k8s here 
-				}
-		}
-	}
-	post {
-		succcess(){
-			sendmail()
-			trigger another job()
-		}
-		failed(){
-				send mail to who triggerd the build
-		}
-		always(){
-				sendmail()
-				clean workspace
-		}
-		aborted(){
-			send mail*()
-		}
-		unstable(){
-			trigger another job()
-		
-		}
-	}
+                userRemoteConfigs: [
+                                    [credentialsId: 'Ravitezzzz45',
+                                     url: 'https://github.com/Ravitezzzz45/webapplication']]
+                                    ])
+            }
+        }
+        stage("test"){
+            steps{
+                echo "this is tested"
+            }
+        }
+         stage("QA"){
+            steps{
+                echo "this is tested"
+            }
+        }
+      stage("build"){
+            steps{
+                echo "this is tested"
+            }
+        }  
+        stage("artifactory push"){
+            steps{
+                echo "this is tested"
+            }
+        }  
+        stage("create image"){
+            steps{
+                echo "this is tested"
+            }
+        }  
+        stage("deploy to k"){
+            steps{
+                echo "this is tested"
+            }
+        }  
+    }
+    post{
+        success{
+            echo "this is post"
+        }
+    }
 }
